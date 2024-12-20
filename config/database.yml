@@ -16,3 +16,7 @@ default: &default
 development:
   <<: *default
   database: airbnb_clone
+
+test:
+  <<: *default
+  database: airbnb_clone_test
