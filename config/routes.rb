@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   root "home#index"
 
   namespace :api do 
-    resources :users, only: :show
+    get "user_by_email/", to: "user_by_email#show", as: :user_by_email, constraints: { email: /.*/ }
   end
 end
