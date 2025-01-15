@@ -2,30 +2,42 @@ import { Controller } from "@hotwired/stimulus";
 import axios from "axios";
 
 export default class extends Controller {
-  static targets = ["email", "submit"];
+  static targets = [
+    "email",
+    "emailWrapper",
+    "invalidSvg",
+    "errorMessage",
+    "submit",
+  ];
 
   connect() {
     this.submitTarget.addEventListener("click", (e) => {
       e.preventDefault();
       if (this.emailTarget.value.length === 0) {
-        alert("Email field is empty");
-        return;
+        this.emailWrapperTarget.classList.add("invalid-inset-input-text-field");
+
+        this.emailWrapperTarget.classList.remove("focus-within:ring-1");
+        this.emailWrapperTarget.classList.remove("focus-within:ring-black");
+        this.emailWrapperTarget.classList.remove("focus-within:border-black");
+        this.invalidSvgTarget.classList.remove("hidden");
+        this.errorMessageTarget.classList.remove("hidden");
+      } else {
+        axios
+          .get("/api/user_by_email", {
+            params: {
+              email: this.emailTarget.value,
+            },
+            headers: {
+              ACCEPT: "application/json",
+            },
+          })
+          .then(() => {
+            Turbo.visit("/users/sign_in");
+          })
+          .catch(() => {
+            Turbo.visit("/users/sign_up");
+          });
       }
-      axios
-        .get("/api/user_by_email", {
-          params: {
-            email: this.emailTarget.value,
-          },
-          headers: {
-            ACCEPT: "application/json",
-          },
-        })
-        .then(() => {
-          Turbo.visit("/users/sign_in");
-        })
-        .catch(() => {
-          Turbo.visit("/users/sign_up");
-        });
     });
   }
 }
