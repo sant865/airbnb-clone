@@ -5,7 +5,6 @@ module Api
       if user
         render json: user, status: :ok
       else
-        console.log("User with email #{params[:email]} not found")
         render json: { error: "User with email #{params[:email]} not found" }, status: :not_found
       end
     end

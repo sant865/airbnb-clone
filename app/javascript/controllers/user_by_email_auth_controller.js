@@ -7,7 +7,6 @@ export default class extends Controller {
   connect() {
     this.submitTarget.addEventListener("click", (e) => {
       e.preventDefault();
-      console.log(this.emailTarget.value);
       if (this.emailTarget.value.length === 0) {
         alert("Email field is empty");
         return;
