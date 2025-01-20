@@ -18,7 +18,7 @@ RSpec.describe "Api::userByEmail", type: :request do
       it "returns a 404 status" do
         get api_user_by_email_path(email: "johndoe@example.com"), headers: headers
         expect(response).to have_http_status(:not_found)
-        expect(JSON.parse(response.body)).to include("error" => "User not found")
+        expect(JSON.parse(response.body)).to include("error" => "User with email johndoe@example.com not found")
       end
     end
   end
