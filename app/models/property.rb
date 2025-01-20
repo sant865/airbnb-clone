@@ -14,6 +14,8 @@ class Property < ApplicationRecord
 
   has_many_attached :images, dependent: :destroy
 
+  has_many :reviews, as: :reviewable
+
   def address
     # Because I'm using fake (faker gem) address and city we have to remove them to get the geolocation
     # [address_1, address_2, city, state, country].compact.join(', ')
@@ -22,5 +24,14 @@ class Property < ApplicationRecord
 
   def default_image
     images.first
+  end
+
+  def average_rating
+    reviews.average(:rating)&.round(2)
+  end
+
+  def truncated_location(max_length = 30)
+    location = "#{city}, #{state}, #{country}"
+    location.length > max_length ? "#{location[0...max_length]}..." : location
   end
 end
