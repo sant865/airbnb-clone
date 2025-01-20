@@ -26,10 +26,6 @@ class Property < ApplicationRecord
     images.first
   end
 
-  def average_rating
-    reviews.average(:rating)&.round(2)
-  end
-
   def truncated_location(max_length = 30)
     location = "#{city}, #{state}, #{country}"
     location.length > max_length ? "#{location[0...max_length]}..." : location
