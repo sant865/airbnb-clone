@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: 7acfda66d1bbfc5c2e201acbd0071c357e588775
+  branch: main
+  specs:
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -87,6 +95,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.1)
       railties (>= 6.0.0)
+    csv (3.3.2)
     date (3.4.1)
     debug (1.9.2)
       irb (~> 1.10)
@@ -105,10 +114,16 @@ GEM
       factory_bot (~> 6.5)
       railties (>= 5.0.0)
     ffi (1.17.0-x86_64-darwin)
+    geocoder (1.8.5)
+      base64 (>= 0.1.0)
+      csv (>= 3.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
+    image_processing (1.13.0)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     importmap-rails (2.0.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -132,8 +147,18 @@ GEM
     marcel (1.0.4)
     matrix (0.4.2)
     method_source (1.1.0)
+    mini_magick (4.13.2)
     mini_mime (1.1.5)
     minitest (5.25.4)
+    monetize (1.13.0)
+      money (~> 6.12)
+    money (6.19.0)
+      i18n (>= 0.6.4, <= 2)
+    money-rails (1.15.0)
+      activesupport (>= 3.0)
+      monetize (~> 1.9)
+      money (~> 6.13)
+      railties (>= 3.0)
     msgpack (1.7.5)
     mysql2 (0.5.6)
     net-imap (0.5.2)
@@ -214,6 +239,9 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.13.2)
+    ruby-vips (2.2.2)
+      ffi (~> 1.12)
+      logger
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -229,6 +257,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -277,14 +307,19 @@ DEPENDENCIES
   debug
   devise
   factory_bot_rails
+  faker!
+  geocoder
+  image_processing (>= 1.2)
   importmap-rails
   jbuilder
+  money-rails (~> 1.7)
   mysql2 (>= 0.5)
   puma (~> 5.0)
   rails (~> 7.0.8, >= 7.0.8.7)
   rspec-rails (~> 6.0.0)
   sassc-rails
   selenium-webdriver
+  shoulda-matchers (~> 5.0)
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
