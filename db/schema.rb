@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_01_21_170901) do
+ActiveRecord::Schema[7.0].define(version: 2025_01_22_031351) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -44,6 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_21_170901) do
     t.bigint "property_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["property_id", "user_id"], name: "index_favorites_on_property_id_and_user_id", unique: true
     t.index ["property_id"], name: "index_favorites_on_property_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
