@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_01_20_221826) do
+ActiveRecord::Schema[7.0].define(version: 2025_01_22_031351) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,16 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_20_221826) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "favorites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "property_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id", "user_id"], name: "index_favorites_on_property_id_and_user_id", unique: true
+    t.index ["property_id"], name: "index_favorites_on_property_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -71,7 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_20_221826) do
     t.integer "price_cents"
     t.string "price_currency"
     t.integer "reviews_count"
-    t.decimal "average_rating", precision: 10
+    t.decimal "average_rating", precision: 10, scale: 2
     t.index ["latitude", "longitude"], name: "index_properties_on_latitude_and_longitude"
   end
 
@@ -100,5 +110,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_20_221826) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favorites", "properties"
+  add_foreign_key "favorites", "users"
   add_foreign_key "profiles", "users"
 end

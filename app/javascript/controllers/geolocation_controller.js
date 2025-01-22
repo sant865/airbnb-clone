@@ -62,4 +62,8 @@ export default class extends Controller {
       });
     }
   }
+
+  favorite(event) {
+    console.log(`Favorite button clicked for property ID:`);
+  }
 }
