@@ -1,13 +1,14 @@
 module Api
   class FavoritesController < ApplicationController
-    before_action :authenticate_user!
+    protect_from_forgery with: :null_session
+    skip_before_action :verify_authenticity_token, if: :json_request?
 
     def create 
       favorite = Favorite.create!(favorite_params)
 
       respond_to do |format|
         format.json do
-          render json: favorite.to_json, status: :created
+          render json: { id: favorite.id }, status: :created
         end
       end
     end
@@ -25,9 +26,13 @@ module Api
     end
 
     private 
+
     def favorite_params
       params.permit(:user_id, :property_id)
     end
 
+    def json_request?
+      request.format.json?
+    end
   end
 end
